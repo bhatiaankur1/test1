@@ -1,0 +1,33 @@
+<h1>Listing books</h1>
+
+
+
+ <% if user_signed_in? %>
+                <li><%= current_user.email %></li>
+                <li><%= link_to "Emails", "/emails"  %></li>              
+                <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete  %></li>
+              <% else %>
+                <li><%= link_to "Log In", new_user_session_path  %></li>
+                <li><%= link_to "Register",  new_user_registration_path  %></li>
+              <% end %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @books.each do |book| %>
+  <tr>
+    <td><%= book.name %></td>
+    <td><%= link_to 'Show', book %></td>
+    <td><%= link_to 'Edit', edit_book_path(book) %></td>
+    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Book', new_book_path %>
